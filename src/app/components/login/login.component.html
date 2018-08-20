@@ -1,0 +1,32 @@
+<section class="main">
+    <div class="container">
+        <div class="user-form col-lg-6 flex-wrap text-center mt-10">
+            <h1 class="w-100">Login</h1>
+            <form class="form w-100 mt-4" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+                <div class="input">
+                    <div class="w-100"> 
+                        <input type="email" name="email" placeholder="Email" class="form__control form__control--large" #email="ngModel" [(ngModel)]="user.email" required>
+                    </div>
+                </div>
+                <div class="input">
+                    <div class="w-100">
+                        <input type="password" name="password" placeholder="Password" class="form__control form__control--large" #password="ngModel" [(ngModel)]="user.password" required>
+                    </div>
+                </div>
+                <div class="w-100">
+                    <button class="btn btn__item btn--black mt-3" type="submit" [disabled]="!loginForm.form.valid">Login</button>
+                </div>
+            </form>
+            <div *ngIf="this.status == 'Error' && this.error != null" class="message message--fail mt-2">
+                <p class="mt-1 mb-1">Something wrong happened</p>
+                <span>{{ this.error }}</span>
+            </div>
+        </div>
+        <div class="col-lg-6 text-center mt-10">
+            <h1 class="w-100">Aren't you registered?</h1>
+            <h3 class="w-100 mt-2">Sign up today!</h3>
+            <h4 class="w-100 mt-1">Just click the link below.</h4>
+            <a [routerLink]="['/register']" class="btn btn__item btn--black mt-3">Sign in</a>
+        </div>
+    </div>
+</section>
