@@ -1,0 +1,60 @@
+<header id="header" class="header">
+    <div class="header__container">
+        <div class="header__logo-container col-xs-12 col-sm-3 col-lg-4">
+            <a class="header__logo" href="#main">
+                <img src="assets/img/header/logo-img.jpg" alt="">
+            </a>
+
+            <i (click)="toggleMenu()" id="btn-menu-open" class="btn__menu btn__menu--header fas fa-bars" style="float: right;"></i>
+        
+        </div>
+        <nav id="header-nav" class="header__nav col-sm-9 col-lg-8">
+            
+            <i (click)="toggleMenu()" id="btn-menu-close" class="btn__menu btn__menu--close fas fa-times"></i>
+            <a [routerLink]="['/home']" [routerLinkActive]="['header__nav-item--is-active']" class="header__nav-item" href="#main">Home</a>
+            <a [routerLink]="['/shop']" [routerLinkActive]="['header__nav-item--is-active']" class="header__nav-item" href="#main">Shop</a>
+            <a [routerLink]="['/about']" [routerLinkActive]="['header__nav-item--is-active']" class="header__nav-item" href="#main">Who We Are</a>
+            <a [routerLink]="['/sales']" [routerLinkActive]="['header__nav-item--is-active']" class="header__nav-item" href="#main">Sales</a>
+    
+            <div *ngIf="!identity" class="user-sections">
+                <a [routerLink]="['/login']" class="btn__header fas fa-user" href="#main"></a>
+            </div>
+            
+            <div *ngIf="identity" class="user-sections">
+                <a [routerLink]="['/wishlist']" class="btn__header fas fa-heart" href="#main"></a>
+                <a [routerLink]="['/bag']" class="btn__header fas fa-shopping-bag" href="#main"></a>
+                <i (click)="logout()" class="btn__header fas fa-sign-out-alt"></i>
+            </div>
+
+        </nav>
+    </div>
+</header>
+
+<router-outlet></router-outlet>
+
+<footer class="footer">
+  <div class="container">
+      <div class="footer__sections col-xs-12 col-md-6">
+          <div class="footer__section">
+              <p class="footer__title">Collections</p>
+              <a href="/shop/Men/1" class="footer__link">Men</a>
+              <a href="/shop/Women/1" class="footer__link">Women</a>
+              <a href="/shop/Girls/1" class="footer__link">Girls</a>
+              <a href="/shop/Boys/1" class="footer__link">Boys</a>
+          </div>
+          <div class="footer__section">
+              <p class="footer__title">About Us</p>
+              <a href="/about" class="footer__link">History</a>
+              <a href="/about" class="footer__link">Location</a>
+          </div>
+          <div class="footer__section">
+              <p class="footer__title">Our outfits</p>
+              <a href="/sales" class="footer__link">Trending</a>
+              <a href="/sales" class="footer__link">Sales</a>
+          </div>
+      </div>
+      <div class="footer__logo col-xs-12 col-md-6">
+          <img src="assets/img/about/white-logo.png" class="footer__image">
+      </div>
+  </div>
+</footer>
