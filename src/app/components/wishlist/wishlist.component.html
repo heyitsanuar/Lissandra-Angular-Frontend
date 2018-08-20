@@ -1,0 +1,45 @@
+<section class="main">
+    <div class="container">
+        <div class="col-xs-12 col-sm-8 flex-center flex-wrap text-center">
+            <h1 class="w-100">Wishlist</h1>
+            <div class="w-100 d-flex flex-wrap mt-5 mb-5">
+                <div *ngFor="let product of wishlist" class="bag-item w-100 d-flex mt-2">
+                    <a (click)="goToProduct(product._id)" class="bag-item__name">
+                        <img class="bag-item__image" src="{{ this.url + 'get-product-image/' + product.images[0] }}">
+                    </a>
+                    <div class="bag-item__info">
+                        <div class="bag-item__head">
+                            <a (click)="goToProduct(product._id)" class="bag-item__name">{{ product.name }}</a>
+                            <i (click)="removeFromWishlist(product._id)" id="btn-menu-close" class="text-black fas fa-times"></i>
+                        </div>
+
+                        <div *ngIf="product.sale == null">
+                            <p class="bag-item__cost">${{ product.cost }}</p>
+                        </div>
+
+                        <div *ngIf="product.sale != null" class="flex-align-center">
+                            <p class="bag-item__cost bag-item__cost--off">${{ product.cost }}</p>
+                            <p class="bag-item__cost bag-item__cost--previous">${{ product.sale }}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="this.status == 'Error' && this.error != null" class="message message--fail mt-2">
+                <p class="mt-1 mb-1">Something wrong happened</p>
+                <span>{{ this.error }}</span>
+            </div>
+        </div>
+
+        <div class="checkout col-xs-12 col-sm-4 flex-center flex-wrap text-center">
+            <h2 class="w-100">Do you like what you found?</h2>
+            <h3 class="w-100 mt-4">Perfect!</h3>
+            <h4 class="w-100 mt-1">We have more to show you.</h4>
+
+            <h3 class="w-100 mt-4 mb-2">Total products: {{ this.wishlist.length }}</h3>
+
+            <a href="/shop" class="btn btn__item btn--white">See more products</a>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,55 @@
+<section class="main trigger">
+    <div class="container">
+        <section class="clothe-list col-xs-12">
+            <div id="menu-category" class="category col-xs-12 col-md-3">
+
+                <i (click)="toggleFilter()" id="btn-category-close" class="btn__menu btn__menu--close fas fa-times"></i>
+                
+                <div class="category__section">
+                    <a (click)="updateCategory(this.category)" class="category__title">{{ this.category }}</a>
+                    <ul class="category__list">
+                        <li *ngFor="let typeLink of types">
+                            <a (click)="updateType(typeLink)" class="category__link">{{ typeLink }}</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div *ngFor="let category of categories" class="category__section">
+                    <a (click)="updateCategory(category)" class="category__title">{{ category }}</a>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-md-9">
+                
+                <i (click)="toggleFilter()" id="btn-category-open" class="btn__menu btn__menu--open fas fa-tshirt"></i>
+                
+                <div class="catalog">
+                    <div *ngFor="let product of products" class="product product--catalog">
+                        <a (click)="goToProduct(product._id)">
+                            <img src="{{ url + 'get-product-image/' + product.images[0] }}" alt="" class="product__image">
+
+                            <div *ngIf="product.sale != null" class="product__off-hero">SALE</div>
+
+                            <p class="product__name">{{ product.name }}</p>
+                        </a>
+                    </div>
+                </div>
+
+                <nav *ngIf="pages > 1">
+                    <ul class="pagination">
+                        <li class="pagination__item">
+                            <a *ngIf="page > 1" (click)="changePage('back')" class="pagination__link btn btn__item btn--black btn--back">Previous</a>
+                        </li>
+                        <li class="pagination__item">
+                            <a *ngIf="pages != page" (click)="changePage('next')" class="pagination__link btn btn__item btn--black btn--back">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </section>
+    </div>
+
+    <previously></previously>
+
+</section>

@@ -1,0 +1,61 @@
+<div class="large-hero trigger">
+    <img src="assets/img/home/hero.jpg" class="image--complete">
+    <div class="large-hero__stuff">
+        <h1 class="large-hero__text">YOUR STYLE IS OUR MUST</h1>
+        <img src="assets/img/header/logo-img.jpg" alt="" class="large-hero__logo">
+    </div>
+</div>
+<div class="home-categories" id="home-categories">
+
+    <div (click)="changeCategoryClasses(0)" class="home-categories__item">
+        <img src="assets/img/home/men.jpg" alt="" class="image--complete">
+        <a href="" class="home-categories__title">MEN</a>
+    </div>
+
+    <div (click)="changeCategoryClasses(1)" class="home-categories__item">
+        <img src="assets/img/home/women.jpg" alt="" class="image--complete">
+        <a href="" class="home-categories__title">WOMEN</a>
+    </div>
+
+    <div (click)="changeCategoryClasses(2)" class="home-categories__item">
+        <img src="assets/img/home/boys.jpg" alt="" class="image--complete">
+        <a href="" class="home-categories__title">BOYS</a>
+    </div>
+
+    <div (click)="changeCategoryClasses(3)" class="home-categories__item">
+        <img src="assets/img/home/girls.jpg" alt="" class="image--complete">
+        <a href="" class="home-categories__title">GIRLS</a>
+    </div>
+
+    <div id="category-info" class="col-xs-12 col-sm-9 category-info--hide">
+        <div class="category-info">
+            <div class="category-info__container">
+                
+                <h2 class="category-info__title">{{ this.category }}</h2>
+                
+                <div class="border border--black"></div>
+
+                <p class="category-info__text">{{ this.description }}</p
+                    >
+                <a (click)="restoreCategories()" id="btn-category-back" class="btn btn__item btn--black btn--back">Back</a>
+                <a (click)="goToCategory()" class="btn btn__item category-info__btn btn--white btn--back">See</a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container">
+        <section class="previously col-xs-12">
+            
+            <div *ngFor="let product of products | slice:0:8;" class="product">
+                <a (click)="goToProduct(product._id)">                    
+                    <img src="{{ this.url + 'get-product-image/' + product.images[0]}}" alt="" class="product__image">
+                    <div *ngIf="product.sale != null" class="product__off-hero">OFF</div>            
+                    <p class="product__name">{{ product.name }}</p>
+                </a>
+            </div>
+        
+        </section>
+    </div>
+</div>

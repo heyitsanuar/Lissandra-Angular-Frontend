@@ -1,0 +1,51 @@
+<section class="main">
+    <div class="container">
+        <div class="user-form col-lg-6 flex-wrap text-center mt-10">
+            <h1>Sign Up</h1>
+            <form class="form w-100 mt-4" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+                <p class="mb-2">Personal Info</p>
+                <div class="input">
+                    <div class="w-100"> 
+                        <input type="text" name="name" placeholder="Name" class="form__control form__control--large" #name="ngModel" [(ngModel)]="user.name" required>
+                    </div>
+                </div>
+                <div class="input">
+                    <div class="w-100"> 
+                        <input type="text" name="surname" placeholder="Last Name" class="form__control form__control--large" #surname="ngModel" [(ngModel)]="user.surname" required>
+                    </div>
+                </div>
+                <p class="mb-2">Access Data</p>
+                <div class="input">
+                    <div class="w-100"> 
+                        <input type="email" name="email" placeholder="Email" class="form__control form__control--large" #email="ngModel" [(ngModel)]="user.email" required>
+                    </div>
+                </div>
+                <div class="input">
+                    <div class="w-100">
+                        <input type="password" name="password" placeholder="Password" class="form__control form__control--large" #password="ngModel" [(ngModel)]="user.password" required>
+                    </div>
+                </div>
+                <div class="w-100">
+                    <button class="btn btn__item btn--black mt-3" type="submit" [disabled]="!registerForm.form.valid">Register</button>
+                </div>
+            </form>
+        
+            <div *ngIf="this.status == 'Success'" class="message message--success mt-2">
+                <p class="mt-1 mb-1">You've registered succesfully</p>
+                <a [routerLink]="['/login']">Try logging in</a>
+            </div>
+
+            <div *ngIf="this.status == 'Error' && this.error != null" class="message message--fail mt-2">
+                <p class="mt-1 mb-1">Something wrong happened</p>
+                <span>{{ this.error }}</span>
+            </div>
+
+        </div>
+        <div class="col-lg-6 text-center mt-10">
+            <h1 class="w-100">Do you have an account already?</h1>
+            <h3 class="w-100 mt-2">Login</h3>
+            <h4 class="w-100 mt-1">Try sign in with your email.</h4>
+            <a [routerLink]="['/login']" class="btn btn__item btn--black mt-3">Login</a>
+        </div>
+    </div>
+</section>
