@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
 
     // Redirects to a category when clicked on the 4-hero-slider
     goToCategory() {
-        this._router.navigate(['/shop/' + this.category + '/1']);
+        this._router.navigate([`/shop/${this.category}/1`]);
     }
 
     // Gets products for homepage

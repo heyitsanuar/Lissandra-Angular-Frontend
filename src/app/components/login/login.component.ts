@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit {
         this._userService.signIn(this.user, 'true').subscribe(
             response => {
                 this.token = response.token;
-                console.log(response);
 
                 if (this.token.length <= 0) {
                     this.status = 'Error';

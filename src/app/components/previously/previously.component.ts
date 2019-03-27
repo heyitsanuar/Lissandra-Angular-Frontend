@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Product } from '../../models/product';
 import { GLOBAL } from '../../services/global';
 import { ProductService } from '../../services/product.service';
@@ -17,8 +17,7 @@ export class PreviouslyComponent implements OnInit {
 
     constructor(
         private _productService: ProductService,
-        private _router: Router,
-        private _route: ActivatedRoute
+        private _router: Router
     ) {
         this.title = 'Previously seen';
         this.url = GLOBAL.url;

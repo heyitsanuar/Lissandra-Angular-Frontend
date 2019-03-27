@@ -64,7 +64,7 @@ export class WishlistComponent implements OnInit {
 
     // Redirects the a clicked product
     goToProduct(productId: string) {
-        this._router.navigate(['/product/' + productId]);
+        this._router.navigate([`/product/${productId}`]);
     }
 
 }

@@ -194,7 +194,7 @@ export class ShopComponent implements OnInit {
 
     // Redirects to a given product when clicked
     goToProduct(productId: string) {
-        this._router.navigate(['/product/' + productId]);
+        this._router.navigate([`/product/${productId}`]);
     }
 
     // Toggles filter menu in Mobile Devices
