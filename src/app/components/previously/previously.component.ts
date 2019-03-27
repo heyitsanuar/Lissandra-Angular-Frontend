@@ -14,27 +14,27 @@ export class PreviouslyComponent implements OnInit {
     public url: string;
 
     @Output() refreshProduct = new EventEmitter();
-    
+
     constructor(
         private _productService: ProductService,
         private _router: Router,
         private _route: ActivatedRoute
-    ){
+    ) {
         this.title = 'Previously seen';
         this.url = GLOBAL.url;
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.loadProducts();
     }
-    
-    //Loads previously seen products from local storage
-    loadProducts(){
+
+    // Loads previously seen products from local storage
+    loadProducts() {
         this.products = this._productService.getLocalStoragePreviousProducts();
     }
 
-    //Redirects to a given product in contact with other components
-    goToProduct(productId: string){
+    // Redirects to a given product in contact with other components
+    goToProduct(productId: string) {
         this._router.navigate(['/product/' + productId]);
         this.refreshProduct.emit(productId);
     }

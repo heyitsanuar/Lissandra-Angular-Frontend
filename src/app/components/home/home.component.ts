@@ -19,39 +19,41 @@ export class HomeComponent implements OnInit {
         private _route: ActivatedRoute,
         private _router: Router,
         private _productService: ProductService
-    ){
+    ) {
         this.url = GLOBAL.url;
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.getProducts();
     }
 
-    //Changing classes for 4-hero-slider
+    // Changing classes for 4-hero-slider
     changeCategoryClasses(clickedElementIndex){
-        var categories = document.getElementsByClassName('home-categories__item');
-        var infoContainer = document.getElementById('category-info');
-        var categoryInfo = document.getElementsByClassName('category-info');
-        
-        for(var i=0; i < categories.length; i++){
-            if(i == clickedElementIndex)
-            continue;
-            
+        let categories = document.getElementsByClassName('home-categories__item');
+        let infoContainer = document.getElementById('category-info');
+        let categoryInfo = document.getElementsByClassName('category-info');
+
+        for (let i = 0; i < categories.length; i++) {
+            if (i === clickedElementIndex) {
+                continue;
+            }
+
             categories[i].classList.add('home-categories__item--invisible');
         }
 
         this.fillInfoText(clickedElementIndex);
+
         infoContainer.classList.remove('category-info--hide');
         categoryInfo[0].classList.add('category-info--is-visible');
     }
 
-    //When clicking back, categories are restored to their original value
-    restoreCategories(){
-        var categories = document.getElementsByClassName('home-categories__item');
-        var infoContainer = document.getElementById('category-info');
-        var categoryInfo = document.getElementsByClassName('category-info');
+    // When clicking back, categories are restored to their original value
+    restoreCategories() {
+        let categories = document.getElementsByClassName('home-categories__item');
+        let infoContainer = document.getElementById('category-info');
+        let categoryInfo = document.getElementsByClassName('category-info');
 
-        for(var i=0; i < categories.length; i++){
+        for (let i = 0; i < categories.length; i++) {
             categories[i].classList.remove('home-categories__item--invisible');
         }
 
@@ -59,11 +61,11 @@ export class HomeComponent implements OnInit {
         categoryInfo[0].classList.remove('category-info--is-visible');
     }
 
-    //Changing category assets depending on the clicked one
-    fillInfoText(key){
-        //Making statements of the existing categories
-        var categories = ['Men', 'Women', 'Boys', 'Girls'];
-        var descriptions = [];
+    // Changing category assets depending on the clicked one
+    fillInfoText(key) {
+        // Making statements of the existing categories
+        const categories = ['Men', 'Women', 'Boys', 'Girls'];
+        let descriptions = [];
 
         //Allocating info to array
         descriptions[0] = "You'll need to grab something nice for dad, your brother, or maybe even something for that guy you've been dating. It doesn't matter if he's a certified street-style star that James Bond would be jealous";
@@ -75,29 +77,29 @@ export class HomeComponent implements OnInit {
         this.description = descriptions[key];
     }
 
-    //Redirects to a category when clicked on the 4-hero-slider
-    goToCategory(){
+    // Redirects to a category when clicked on the 4-hero-slider
+    goToCategory() {
         this._router.navigate(['/shop/' + this.category + '/1']);
     }
 
-    //Gets products for homepage
-    getProducts(){
+    // Gets products for homepage
+    getProducts() {
         this._productService.getProductsByCategory('Men', 1).subscribe(
             response => {
                 this.products = response.products;
             },
             error => {
-                let errorMessage = <any>error;
+                const errorMessage = <any>error;
 
-                if(errorMessage != null){
+                if (errorMessage != null) {
                     this._router.navigate(['/']);
                 }
             }
         );
     }
 
-    //Redirects to a given product when clicked on homepage catalog
-    goToProduct(productId: string){
-        this._router.navigate(['/product/'+productId]);
+    // Redirects to a given product when clicked on homepage catalog
+    goToProduct(productId: string) {
+        this._router.navigate(['/product/' + productId]);
     }
 }

@@ -14,40 +14,40 @@ export class SignUpComponent implements OnInit {
     public identity;
     public status: string;
     public error: string;
-    
+
     constructor(
         private _router: Router,
         private _route: ActivatedRoute,
         private _userService: UserService
-    ){
-        this.user = new User('','','','','','');
+    ) {
+        this.user = new User('', '', '', '', '', '');
     }
 
-    ngOnInit(){
-        //Checking if token and identity are set in local storage
+    ngOnInit() {
+        // Checking if token and identity are set in local storage
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
 
-        //If user is logged in already, then will be redirected to home
-        if(this.token && this.identity){
+        // If user is logged in already, then will be redirected to home
+        if (this.token && this.identity) {
             this._router.navigate(['/']);
         }
     }
 
-    //Registers the user
-    onSubmit(form){
+    // Registers the user
+    onSubmit(form) {
         this._userService.register(this.user).subscribe(
             response => {
-                if(response.user && response.user._id){
-                    this.status = "Success";
+                if (response.user && response.user._id) {
+                    this.status = 'Success';
                     form.reset();
                 }
             },
             error => {
-                let errorMessage = <any>error.error.message;
+                const errorMessage = <any>error.error.message;
 
-                if(errorMessage != null){
-                    this.status = "Error";
+                if (errorMessage != null) {
+                    this.status = 'Error';
                     this.error = errorMessage;
                 }
             }

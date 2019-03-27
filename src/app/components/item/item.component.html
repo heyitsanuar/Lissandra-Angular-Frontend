@@ -4,39 +4,40 @@
             <div class="item__images col-xs-12 col-md-6 col-lg-6">
 
                 <div *ngIf="this.product" class="item__main-image">
-                    <img src="{{ this.url + 'get-product-image/' + this.product.images[0] }}" alt="" class="image--complete">
+                    <img src="{{ this.url + '/get-product-image/' + this.product.images[0] }}" alt="" class="image--complete">
                 </div>
                 
             </div>
             <div class="item__info col-xs-12 col-md-6 col-lg-6">
 
                 <div class="item__info-container">
-                    <h3 class="item__title">{{ this.product.name }}</h3>
-                    <div *ngIf="this.product && this.product.cost && this.product.sale == null" class="item__cost-container">
-                        <span class="item__cost">${{ this.product.cost }}</span>
+                    <div *ngIf='this.product' >
+                        <h3 class="item__title">{{ this.product.name }}</h3>
+                        <div *ngIf="this.product && this.product.cost && this.product.sale == null" class="item__cost-container">
+                            <span class="item__cost">${{ this.product.cost }}</span>
+                        </div>
+                        <div *ngIf="this.product && this.product.cost && this.product.sale != null" class="item__cost-container">
+                            <span class="item__cost item__cost--new">${{ this.product.cost }}</span>
+                            <span class="item__cost item__cost--off">${{ this.product.sale }}</span>
+                        </div>
+                        <div class="item__sizes">
+                            <p class="item__sizes-text">Sizes</p>
+                            <a href="#" class="btn btn__size btn__size--available">SM</a>
+                            <a href="#" class="btn btn__size btn__size--available">M</a>
+                            <a href="#" class="btn btn__size btn__size--available">L</a>
+                        </div>
+                        <div class="item__buttons">
+                            <a *ngIf="!isInWishlist" (click)="addItemToWishlist()" class="btn btn__item btn--black">Wishlist</a>
+                            <a *ngIf="isInWishlist" (click)="removeItemFromWishlist()" class="btn btn__item btn--black">Remove from Wishlist</a>
+                            <a *ngIf="!isInBag" (click)="addItemToBag()" class="btn btn__item btn--white">Add to bag</a>
+                            <a *ngIf="isInBag" (click)="removeItemFromBag()" class="btn btn__item btn--white">Remove from bag</a>
+                        </div>
+                        <h4 class="item__description-title">Description</h4>
+                        <p class="item__description-text">
+                            {{ this.product.description }}
+                        </p>
                     </div>
-                    <div *ngIf="this.product && this.product.cost && this.product.sale != null" class="item__cost-container">
-                        <span class="item__cost item__cost--new">${{ this.product.cost }}</span>
-                        <span class="item__cost item__cost--off">${{ this.product.sale }}</span>
-                    </div>
-                    <div class="item__sizes">
-                        <p class="item__sizes-text">Sizes</p>
-                        <a href="#" class="btn btn__size btn__size--available">SM</a>
-                        <a href="#" class="btn btn__size btn__size--available">M</a>
-                        <a href="#" class="btn btn__size btn__size--available">L</a>
-                    </div>
-                    <div class="item__buttons">
-                        <a *ngIf="!isInWishlist" (click)="addItemToWishlist()" class="btn btn__item btn--black">Wishlist</a>
-                        <a *ngIf="isInWishlist" (click)="removeItemFromWishlist()" class="btn btn__item btn--black">Remove from Wishlist</a>
-                        <a *ngIf="!isInBag" (click)="addItemToBag()" class="btn btn__item btn--white">Add to bag</a>
-                        <a *ngIf="isInBag" (click)="removeItemFromBag()" class="btn btn__item btn--white">Remove from bag</a>
-                    </div>
-                    <h4 class="item__description-title">Description</h4>
-                    <p class="item__description-text">
-                        {{ this.product.description }}
-                    </p>
                 </div>
-
             </div>
         </section>
     </div>

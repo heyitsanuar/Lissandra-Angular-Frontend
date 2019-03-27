@@ -10,7 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { BagComponent } from './components/bag/bag.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 
-const appRoutes: Routes = [
+const AppRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
@@ -27,5 +27,5 @@ const appRoutes: Routes = [
 ];
 
 //Exporting providers
-export const appRoutingProviders: any[] = [];
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const AppRoutingProvider: any[] = [];
+export const Routing: ModuleWithProviders = RouterModule.forRoot(AppRoutes);

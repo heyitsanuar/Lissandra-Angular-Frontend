@@ -1,4 +1,4 @@
-export class Product{
+export class Product {
     constructor(
         public _id: string,
         public name: string,
@@ -8,5 +8,5 @@ export class Product{
         public type: string,
         public images: [string],
         public sale: string
-    ){}
+    ) {}
 }

@@ -3,9 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MomentModule } from 'angular2-moment';
-import { routing, appRoutingProviders } from './app.routing';
+import { Routing, AppRoutingProvider } from './app.routing';
 
-//Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -36,10 +35,10 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    routing,
+    Routing,
     MomentModule
   ],
-  providers: [appRoutingProviders],
+  providers: [AppRoutingProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

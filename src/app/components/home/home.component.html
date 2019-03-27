@@ -50,7 +50,7 @@
             
             <div *ngFor="let product of products | slice:0:8;" class="product">
                 <a (click)="goToProduct(product._id)">                    
-                    <img src="{{ this.url + 'get-product-image/' + product.images[0]}}" alt="" class="product__image">
+                    <img src="{{ this.url + '/get-product-image/' + product.images[0]}}" alt="" class="product__image">
                     <div *ngIf="product.sale != null" class="product__off-hero">OFF</div>            
                     <p class="product__name">{{ product.name }}</p>
                 </a>

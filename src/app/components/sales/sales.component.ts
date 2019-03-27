@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './sales.component.html'
 })
 export class SalesComponent {
-    constructor(){}
+    constructor() {}
 }

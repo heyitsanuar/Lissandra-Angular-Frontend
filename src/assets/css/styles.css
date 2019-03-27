@@ -776,6 +776,7 @@ h2 {
 @media (min-width: 992px) {
   .item {
     margin-bottom: 8.5625rem;
+    min-height: 500px;
   }
 }
 

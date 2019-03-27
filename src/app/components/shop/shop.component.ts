@@ -28,180 +28,177 @@ export class ShopComponent implements OnInit {
         private _productService: ProductService,
         private _route: ActivatedRoute,
         private _router: Router
-    ){
+    ) {
         this.url = GLOBAL.url;
         this.category = 'Men';
         this.categories = ['Women', 'Girls', 'Boys'];
     }
-    
-    ngOnInit(){
+
+    ngOnInit() {
         this.filter = document.getElementById('menu-category');
 
-        //Loads menu assets
+        // Loads menu assets
         this.actualCategory();
         this.actualType();
         this.actualPage();
         this.updateFilterTypes();
     }
 
-    //Updates the actual category
-    actualCategory(){
-        this._route.params.subscribe(params => {            
+    // Updates the actual category
+    actualCategory() {
+        this._route.params.subscribe(params => {
             let index;
             this.category = 'Men';
-            
-            //If category exist, we'll change the categories array to make
-            //the menu look according to the current category
-            if(params['category']){
+
+            if (params['category']) {
                 index = this.categories.indexOf(params['category']);
                 this.categories[index] = this.category;
-                
+
                 this.category = params['category'];
 
             }
         });
     }
 
-    //Updates the current type within the category
-    actualType(){
+    // Updates the current type within the category
+    actualType() {
         this._route.params.subscribe(params => {
-            if(params['type']){
+            if (params['type']) {
                 this.type = params['type'];
             }
         });
     }
 
-    //Gets teh actual page
-    actualPage(){
+    // Gets teh actual page
+    actualPage() {
         this._route.params.subscribe(params => {
             let page = +params['page'];
-            
-            if(!params['page']){
+
+            if (!params['page']) {
                 page = 1;
             }
 
             this.page = page;
 
-            if(!page){
+            if (!page) {
                 page = 1;
-            }else{
+            } else {
                 this.nextPage = page + 1;
                 this.prevPage = (this.prevPage <= 0) ? 1 : page - 1;
             }
 
-            if(this.type == null){
+            if (this.type == null) {
                 this.getProductsByCategory(page, this.category);
-            }else{
+            } else {
                 this.getProductsByType(this.category, this.type, page);
             }
         });
     }
 
-    //Gets list of products from a given category
-    getProductsByCategory(page, category){
+    // Gets list of products from a given category
+    getProductsByCategory(page, category) {
         this._productService.getProductsByCategory(category, page).subscribe(
             response => {
-                if(response){
+                if (response) {
                     this.products = response.products;
                     this.pages = response.pages;
-                }else{
+                } else {
                     this.status = 'Error';
                 }
             },
             error => {
-                let errorMessage = <any>error.error.message;
+                const errorMessage = <any>error.error.message;
 
-                if(errorMessage != null){
+                if (errorMessage != null) {
                     this.status = 'Error';
                     this._router.navigate(['/']);
                 }
             }
         );
-    
     }
 
-    getProductsByType(category, type, page){
+    getProductsByType(category, type, page) {
         this._productService.getProductsByType(category, type, page).subscribe(
             response => {
-                if(response){
+                if (response) {
                     this.products = response.products;
                     this.pages = response.pages;
-                }else{
+                } else {
                     this.status = 'Error';
                 }
             },
             error => {
-                let errorMessage = <any>error.error.message;
+                const errorMessage = <any>error.error.message;
 
-                if(errorMessage != null){
+                if (errorMessage != null) {
                     this.status = 'Error';
                     this._router.navigate(['/']);
                 }
             }
-        )
+        );
     }
 
-    updateFilterTypes(){
+    updateFilterTypes() {
         this._productService.getTypesByCategory(this.category).subscribe(
             response => {
                 this.types = response.types;
             },
             error => {
-                let errorMessage = <any>error.error.message;
+                const errorMessage = <any>error.error.message;
 
-                if(errorMessage != null){
+                if (errorMessage != null) {
                     this.status = 'Error';
                     this._router.navigate(['/']);
                 }
             }
-        )
+        );
     }
 
-    //Resets all shop products, menu categories, and types 
-    updateCategory(category){
-        let index = this.categories.indexOf(category);
+    // Resets all shop products, menu categories, and types
+    updateCategory(category) {
+        const index = this.categories.indexOf(category);
 
         this.categories[index] = this.category;
         this.category = category;
         this.type = null;
 
-        //Update page, types, categories
+        // Update page, types, categories
         this.actualPage();
         this.updateFilterTypes();
     }
 
-    //Updates the current type within the category
-    updateType(type){
+    // Updates the current type within the category
+    updateType(type) {
         this.type = type;
         this.actualPage();
     }
 
-    //Changes the current page to call other products
-    changePage(direction){
-        if(direction == 'back'){
+    // Changes the current page to call other products
+    changePage(direction) {
+        if (direction === 'back') {
             this.nextPage = this.page;
             this.page = this.prevPage;
             this.prevPage = (this.prevPage <= 0) ? 1 : this.page - 1;
-        }else{
+        } else {
             this.prevPage = this.page;
             this.page = this.nextPage;
-            this.nextPage = (this.nextPage == this.pages) ? this.pages : this.page + 1;
+            this.nextPage = (this.nextPage === this.pages) ? this.pages : this.page + 1;
         }
 
-        if(this.type == null){
+        if (this.type == null) {
             this.getProductsByCategory(this.page, this.category);
-        }else{
+        } else {
             this.getProductsByType(this.category, this.type, this.page);
         }
     }
 
-    //Redirects to a given product when clicked
-    goToProduct(productId: string){
-        this._router.navigate(['/product/'+productId]);
+    // Redirects to a given product when clicked
+    goToProduct(productId: string) {
+        this._router.navigate(['/product/' + productId]);
     }
 
-    //Toggles filter menu in Mobile Devices
-    toggleFilter(){
+    // Toggles filter menu in Mobile Devices
+    toggleFilter() {
         this.filter.classList.toggle('category--is-expanded');
     }
 }

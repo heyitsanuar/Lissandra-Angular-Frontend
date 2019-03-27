@@ -21,50 +21,50 @@ export class WishlistComponent implements OnInit {
         private _route: ActivatedRoute,
         private _router: Router,
         private _userService: UserService
-    ){
+    ) {
         this.url = GLOBAL.url;
     }
-    
-    ngOnInit(){
-        //Checking if token and identity are set in local storage
+
+    ngOnInit() {
+        // Checking if token and identity are set in local storage
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
 
-        //If user is not logged in, then will be redirected to home
-        if(!this.token || !this.identity){
+        // If user is not logged in, then will be redirected to home
+        if (!this.token || !this.identity) {
             this._router.navigate(['/']);
         }
 
         this.loadProducts();
     }
 
-    //Gets the products of the user's bag
-    loadProducts(){
+    // Gets the products of the user's bag
+    loadProducts() {
         this.wishlist = this._userService.getWishlist().products;
     }
 
-    //Removes a given item from the user's bag
-    removeFromWishlist(productId){
+    // Removes a given item from the user's bag
+    removeFromWishlist(productId) {
         this._userService.removeFromWishlist(this.identity._id, productId).subscribe(
             response => {
-                //Updates the bag and sets it up in local storage
+                // Updates the bag and sets it up in local storage
                 this.wishlist = response.wishlist.products;
                 localStorage.setItem('wishlist', JSON.stringify(response.wishlist));
             },
             error => {
-                let errorMessage = <any>error.error.message;
+                const errorMessage = <any>error.error.message;
 
-                if(errorMessage != null){
-                    this.status = "Error";
+                if (errorMessage != null) {
+                    this.status = 'Error';
                     this.error = errorMessage;
                 }
             }
         );
     }
 
-    //Redirects the a clicked product
-    goToProduct(productId: string){
-        this._router.navigate(['/product/'+productId]);
+    // Redirects the a clicked product
+    goToProduct(productId: string) {
+        this._router.navigate(['/product/' + productId]);
     }
 
 }

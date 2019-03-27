@@ -6,7 +6,7 @@
         <div class="products--previously">
             <div *ngFor="let product of products" class="product">
                 <a (click)="goToProduct(product._id)">                    
-                    <img src="{{ this.url + 'get-product-image/' + product.images[0]}}" alt="" class="product__image">
+                    <img src="{{ this.url + '/get-product-image/' + product.images[0]}}" alt="" class="product__image">
                     <div *ngIf="product.sale != null" class="product__off-hero">SALE</div>
                     <p class="product__name">{{ product.name }}</p>
                 </a>

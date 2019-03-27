@@ -26,7 +26,7 @@
                 <div class="catalog">
                     <div *ngFor="let product of products" class="product product--catalog">
                         <a (click)="goToProduct(product._id)">
-                            <img src="{{ url + 'get-product-image/' + product.images[0] }}" alt="" class="product__image">
+                            <img src="{{ url + '/get-product-image/' + product.images[0] }}" alt="" class="product__image">
 
                             <div *ngIf="product.sale != null" class="product__off-hero">SALE</div>
 
