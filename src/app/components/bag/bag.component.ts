@@ -1,5 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import _ from 'lodash';
+
 import { Product } from '../../models/product';
 import { GLOBAL } from '../../services/global';
 import { UserService } from '../../services/user.service';
@@ -16,10 +18,9 @@ export class BagComponent implements OnInit {
     public token;
     public status: string;
     public error: string;
-    public totalCost;
+    public totalCost: number;
 
     constructor(
-        private _route: ActivatedRoute,
         private _router: Router,
         private _userService: UserService
     ) {
@@ -70,18 +71,12 @@ export class BagComponent implements OnInit {
 
     // Redirects the a clicked product
     goToProduct(productId: string) {
-        this._router.navigate(['/product/' + productId]);
+        this._router.navigate([`/product/${productId}`]);
     }
 
     // Updates the total cost when adding or removing products
     updateTotalCost() {
-        this.totalCost = 0;
-
-        this.bag.forEach(currentProduct => {
-            this.totalCost += parseFloat(currentProduct.cost);
-        });
-
-        this.totalCost = this.totalCost.toFixed(2);
+        this.totalCost = _.sumBy(this.bag, 'cost');
     }
 
 }

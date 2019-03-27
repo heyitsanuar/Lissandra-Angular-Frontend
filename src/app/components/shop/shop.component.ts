@@ -13,11 +13,11 @@ export class ShopComponent implements OnInit {
     public products: Product[];
     public status: string;
     public url: string;
-    public page;
-    public nextPage;
-    public prevPage;
-    public pages;
-    public total;
+    public page: number;
+    public nextPage: number;
+    public prevPage: number;
+    public pages: number;
+    public total: number;
     public category: string;
     public type: string;
     public types: string[];
@@ -55,7 +55,6 @@ export class ShopComponent implements OnInit {
                 this.categories[index] = this.category;
 
                 this.category = params['category'];
-
             }
         });
     }
@@ -72,26 +71,15 @@ export class ShopComponent implements OnInit {
     // Gets teh actual page
     actualPage() {
         this._route.params.subscribe(params => {
-            let page = +params['page'];
+            this.page = +params['page'] || 1;
+            this.nextPage = this.page + 1;
+            this.prevPage = (this.prevPage <= 0) ? 1 : this.page - 1;
 
-            if (!params['page']) {
-                page = 1;
+            if (this.type) {
+                return this.getProductsByType(this.category, this.type, this.page);
             }
 
-            this.page = page;
-
-            if (!page) {
-                page = 1;
-            } else {
-                this.nextPage = page + 1;
-                this.prevPage = (this.prevPage <= 0) ? 1 : page - 1;
-            }
-
-            if (this.type == null) {
-                this.getProductsByCategory(page, this.category);
-            } else {
-                this.getProductsByType(this.category, this.type, page);
-            }
+            this.getProductsByCategory(this.page, this.category);
         });
     }
 
@@ -99,12 +87,12 @@ export class ShopComponent implements OnInit {
     getProductsByCategory(page, category) {
         this._productService.getProductsByCategory(category, page).subscribe(
             response => {
-                if (response) {
-                    this.products = response.products;
-                    this.pages = response.pages;
-                } else {
-                    this.status = 'Error';
+                if (!response.products) {
+                    return this.status = 'Error';
                 }
+
+                this.products = response.products;
+                this.pages = response.pages;
             },
             error => {
                 const errorMessage = <any>error.error.message;
@@ -120,12 +108,12 @@ export class ShopComponent implements OnInit {
     getProductsByType(category, type, page) {
         this._productService.getProductsByType(category, type, page).subscribe(
             response => {
-                if (response) {
-                    this.products = response.products;
-                    this.pages = response.pages;
-                } else {
+                if (!response.products) {
                     this.status = 'Error';
                 }
+
+                this.products = response.products;
+                this.pages = response.pages;
             },
             error => {
                 const errorMessage = <any>error.error.message;
@@ -185,11 +173,11 @@ export class ShopComponent implements OnInit {
             this.nextPage = (this.nextPage === this.pages) ? this.pages : this.page + 1;
         }
 
-        if (this.type == null) {
-            this.getProductsByCategory(this.page, this.category);
-        } else {
-            this.getProductsByType(this.category, this.type, this.page);
+        if (this.type) {
+            return this.getProductsByType(this.category, this.type, this.page);
         }
+
+        this.getProductsByCategory(this.page, this.category);
     }
 
     // Redirects to a given product when clicked

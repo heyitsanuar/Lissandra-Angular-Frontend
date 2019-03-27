@@ -229,7 +229,6 @@ export class ItemComponent implements OnInit {
                 this.getUserWishlist();
             },
             error => {
-                console.log(error);
                 const errorMessage = <any>error;
 
                 if (errorMessage != null) {

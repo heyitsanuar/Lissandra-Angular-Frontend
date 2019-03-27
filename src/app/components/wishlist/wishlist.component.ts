@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Product } from '../../models/product';
 import { GLOBAL } from '../../services/global';
 import { UserService } from '../../services/user.service';
@@ -11,14 +11,13 @@ import { UserService } from '../../services/user.service';
 })
 export class WishlistComponent implements OnInit {
     public wishlist: Product[];
-    public url;
+    public url: string;
     public identity;
-    public token;
+    public token: string;
     public status: string;
     public error: string;
 
     constructor(
-        private _route: ActivatedRoute,
         private _router: Router,
         private _userService: UserService
     ) {

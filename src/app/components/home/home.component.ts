@@ -86,6 +86,6 @@ export class HomeComponent implements OnInit {
 
     // Redirects to a given product when clicked on homepage catalog
     goToProduct(productId: string) {
-        this._router.navigate(['/product/' + productId]);
+        this._router.navigate([`/product/${productId}`]);
     }
 }

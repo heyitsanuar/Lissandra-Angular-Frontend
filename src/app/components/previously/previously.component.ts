@@ -34,7 +34,7 @@ export class PreviouslyComponent implements OnInit {
 
     // Redirects to a given product in contact with other components
     goToProduct(productId: string) {
-        this._router.navigate(['/product/' + productId]);
+        this._router.navigate([`/product/${productId}`]);
         this.refreshProduct.emit(productId);
     }
 }

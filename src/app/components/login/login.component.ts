@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { Router, ActivatedRoute,  Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
     public error: string;
 
     constructor(
-        private _route: ActivatedRoute,
         private _router: Router,
         private _userService: UserService
     ) {

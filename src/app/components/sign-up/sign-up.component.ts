@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
@@ -10,14 +10,13 @@ import { UserService } from '../../services/user.service';
 })
 export class SignUpComponent implements OnInit {
     public user: User;
-    public token;
+    public token: string;
     public identity;
     public status: string;
     public error: string;
 
     constructor(
         private _router: Router,
-        private _route: ActivatedRoute,
         private _userService: UserService
     ) {
         this.user = new User('', '', '', '', '', '');
