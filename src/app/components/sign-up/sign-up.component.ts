@@ -4,7 +4,7 @@ import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'sign-up',
+    selector: 'app-sign-up-component',
     templateUrl: './sign-up.component.html',
     providers: [UserService]
 })

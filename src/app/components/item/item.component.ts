@@ -6,7 +6,7 @@ import { ProductService } from '../../services/product.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'item',
+    selector: 'app-item-component',
     templateUrl: './item.component.html',
     providers: [
         ProductService,

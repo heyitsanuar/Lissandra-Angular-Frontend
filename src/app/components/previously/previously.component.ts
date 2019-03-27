@@ -5,7 +5,7 @@ import { GLOBAL } from '../../services/global';
 import { ProductService } from '../../services/product.service';
 
 @Component({
-    selector: 'previously',
+    selector: 'app-previously-component',
     templateUrl: './previously.component.html'
 })
 export class PreviouslyComponent implements OnInit {

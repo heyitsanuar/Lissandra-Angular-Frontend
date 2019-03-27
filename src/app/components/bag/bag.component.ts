@@ -5,7 +5,7 @@ import { GLOBAL } from '../../services/global';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'bag',
+    selector: 'app-bag-component',
     templateUrl: './bag.component.html',
     providers: [UserService]
 })

@@ -5,7 +5,7 @@ import { GLOBAL } from '../../services/global';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'wishlist',
+    selector: 'app-wishlist-component',
     templateUrl: './wishlist.component.html',
     providers: [UserService]
 })

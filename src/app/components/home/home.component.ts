@@ -5,7 +5,7 @@ import { GLOBAL } from '../../services/global';
 import { ProductService } from '../../services/product.service';
 
 @Component({
-    selector: 'home',
+    selector: 'app-home-component',
     templateUrl: './home.component.html',
     providers: [ProductService]
 })
