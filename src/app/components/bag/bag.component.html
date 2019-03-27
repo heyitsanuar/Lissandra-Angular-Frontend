@@ -7,7 +7,7 @@
                 <div *ngFor="let product of bag" class="bag-item w-100 d-flex mt-2">
 
                     <a (click)="goToProduct(product._id)" class="bag-item__name">
-                        <img class="bag-item__image" src="{{ this.url + 'get-product-image/' + product.images[0] }}">
+                        <img class="bag-item__image" src="{{ this.url + '/get-product-image/' + product.images[0] }}">
                     </a>
 
                     <div class="bag-item__info">

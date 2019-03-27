@@ -28,12 +28,12 @@ export class UserService {
 
     // POST '/login' Signs in a new user and returns token if necessary
     signIn(user, getToken = null): Observable <any> {
+        // Allocating token in case it was sent
+        user.getToken = (getToken != null) ? getToken : null;
+
         // Specifying CORS setup and params to be sent
         const params = JSON.stringify(user);
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-        // Allocating token in case it was sent
-        user.getToken = (getToken != null) ? getToken : null;
 
         // Returning response from POST request with headers
         return this._http.post(`${this.url}/login`, params, { headers });

@@ -72,7 +72,7 @@ export class ItemComponent implements OnInit {
     }
 
     // Resets all product flags
-    refreshProduct(event) {
+    refreshProduct(event: Event) {
         // Restarting flags to control both wishlist and bag
         this.isInBag = false;
         this.isInWishlist = false;
@@ -87,23 +87,11 @@ export class ItemComponent implements OnInit {
 
     // Checks whether the product is either in wishlist or shopping bag
     checkIfOnList(productId) {
-        // Allocating wishlist and bag data from local storage
         const wishlist = JSON.parse(localStorage.getItem('wishlist'));
         const bag = JSON.parse(localStorage.getItem('bag'));
 
-        // Checks if the products exist in bag
-        bag.forEach(currentProductInBag => {
-           if (productId === currentProductInBag._id) {
-               this.isInBag = true;
-           }
-        });
-
-        // Checks if the products exist in wishlist
-        wishlist.forEach(currentProductInWishlist => {
-            if (productId === currentProductInWishlist._id) {
-                this.isInWishlist = true;
-            }
-        });
+        this.isInBag = bag.products.some(productKey => productKey._id === productId);
+        this.isInWishlist = wishlist.products.some(productKey => productKey._id === productId);
     }
 
     // Gets the user bag by making a GET request and sets it into local storage
@@ -152,11 +140,14 @@ export class ItemComponent implements OnInit {
                 // Changing product state
                 this.status = 'Success';
                 this.isInBag = true;
+
+                localStorage.setItem('bag', JSON.stringify(response.bag));
+
                 // Refreshing local storage items
                 this.getUserBag();
             },
             error => {
-                const errorMessage = <any>error.error.message;
+                const errorMessage = <any>error;
 
                 if (errorMessage != null) {
                     this.status = 'Error';
@@ -183,7 +174,7 @@ export class ItemComponent implements OnInit {
                 this.getUserBag();
             },
             error => {
-                const errorMessage = <any>error.error.message;
+                const errorMessage = <any>error;
 
                 if (errorMessage != null) {
                     this.status = 'Error';
@@ -205,11 +196,13 @@ export class ItemComponent implements OnInit {
                 // Changing product state
                 this.status = 'Success';
                 this.isInWishlist = true;
+
+                localStorage.setItem('wishlist', JSON.stringify(response.wishlist));
                 // Refreshing local storage items
                 this.getUserWishlist();
             },
             error => {
-                const errorMessage = <any>error.error.message;
+                const errorMessage = <any>error;
 
                 if (errorMessage != null) {
                     this.status = 'Error';
@@ -236,7 +229,8 @@ export class ItemComponent implements OnInit {
                 this.getUserWishlist();
             },
             error => {
-                const errorMessage = <any>error.error.message;
+                console.log(error);
+                const errorMessage = <any>error;
 
                 if (errorMessage != null) {
                     this.status = 'Error';
